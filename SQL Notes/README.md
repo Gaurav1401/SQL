@@ -1,1 +1,1 @@
-
+Helpful notes for SQL that I made from [The SQL MicroDegree 2021: From SQL Basics To MySQL Mastery](https://www.udemy.com/course/sqlmicrodegree/?utm_campaign=email&utm_source=sendgrid.com&utm_medium=email)
