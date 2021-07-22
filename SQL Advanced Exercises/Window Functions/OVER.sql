@@ -58,7 +58,27 @@ SELECT p.[FirstName],
 		eph.[Rate],
 		[Average Rate] = AVG(eph.[Rate]) OVER(),
 		[MaximumRate] = MAX(eph.[Rate]) OVER(),
-		[DiffFromAvgRate] = eph.[Rate] - AVG(eph.[Rate])
+		[DiffFromAvgRate] = eph.[Rate] - AVG(eph.[Rate]) OVER(),
+FROM [AdventureWorks2019].[Person].[Person] AS p
+JOIN [AdventureWorks2019].[HumanResources].[Employee] AS e
+	ON p.BusinessEntityID = e.BusinessEntityID
+JOIN [AdventureWorks2019].[HumanResources].[EmployeePayHistory] AS eph
+	ON p.BusinessEntityID = eph.BusinessEntityID;
+
+-- Exercise 4
+-- Enhance your query from Exercise 3 by adding a derived column called
+-- "PercentofMaxRate" that returns the result of the following calculation:
+-- An employees's pay rate, DIVIDED BY the maximum of all values in the "Rate" column, times 100.
+
+
+SELECT p.[FirstName],
+		p.[LastName],
+		e.[JobTitle],
+		eph.[Rate],
+		[Average Rate] = AVG(eph.[Rate]) OVER(),
+		[MaximumRate] = MAX(eph.[Rate]) OVER(),
+		[DiffFromAvgRate] = eph.[Rate] - AVG(eph.[Rate]) OVER(),
+		[PercentofMaxRate] = (eph.[Rate]/MAX(eph.[Rate]) OVER())*100 
 FROM [AdventureWorks2019].[Person].[Person] AS p
 JOIN [AdventureWorks2019].[HumanResources].[Employee] AS e
 	ON p.BusinessEntityID = e.BusinessEntityID
